@@ -11,3 +11,12 @@ gist-method String#reverse  - generates a listing and places on github
 execute shell commands by prepending with .    e.g. .pwd
 
 cd object   - switches to the context of the object
+
+to suppress the output of a method call, append a semi-colon
+
+show-input
+
+ammend-line
+
+whereami - displays current location
+
