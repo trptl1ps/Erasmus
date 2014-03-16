@@ -78,6 +78,8 @@
 # Say hi
 def display_welcome_message
 	puts "==>in #{__method__.to_s}" if $DEBUG
+	
+	binding.pry
 
 	puts "Welcome to Raz's Blackjack version 1.0"
 	display_money
@@ -155,6 +157,8 @@ def play_game
 
 		when 'H'
 			# Deal another card
+			binding.pry 
+
 			deal_card(player_hand)
 			display_hands(player_hand, dealer_hand, dealer_turn)
 			$game_status = display_status(player_hand, dealer_hand, dealer_turn)
@@ -265,7 +269,9 @@ end
 # Shows the hands of both player and dealer and evaluates if the game
 # is over.
 # 
-# Needs to know if to show or hide the other dealer card
+# dealer_turn: if true, show dealer card
+#              if false, hide dealer card
+# NOTE: there is a kludge to show both dealer cards if they have a blackjack
 def display_hands(player_hand, dealer_hand, dealer_turn)
 	puts "==>in #{__method__.to_s}" if $DEBUG
 
@@ -275,6 +281,16 @@ def display_hands(player_hand, dealer_hand, dealer_turn)
 
 	# Determine the max rows to display
 	max_rows = [player_hand.length, dealer_hand.length].max
+
+	binding.pry
+
+	# This is a kludge
+	# We need to check for the situation where the dealer has a blackjack because in that case
+	# the dealer's cards have to be displayed. To do this, we add a test here to see if the dealer
+	# has a blackjack, and if so, call set dealer_turn to true so both cards are displayed
+	if player_hand.length == 2 && dealer_hand == 2 and get_hand_total(dealer_hand) == 21
+		dealer_turn = true
+	end
 
 	for index in 0..max_rows-1
 		display_card(player_hand, dealer_hand, index, dealer_turn)
