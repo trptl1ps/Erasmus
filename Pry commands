@@ -1,0 +1,13 @@
+Pry commands
+
+Read Eval Print Loop (REPL)
+
+Edit ~/.pryrc for customizations
+
+show-doc - displays documention
+show-method - displays c source code
+gist-method String#reverse  - generates a listing and places on github
+
+execute shell commands by prepending with .    e.g. .pwd
+
+cd object   - switches to the context of the object
